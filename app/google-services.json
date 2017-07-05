@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "228183489657",
+    "project_id": "interviewtask-148711"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228183489657:android:d17117e23190e69c",
+        "android_client_info": {
+          "package_name": "com.example.shiva.taskshiva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228183489657-ngvj0tdh49000bu8280d5vs9e9iv0ri5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shiva.taskshiva",
+            "certificate_hash": "98e502d9f433ae19a91938f17c3940db5a272e70"
+          }
+        },
+        {
+          "client_id": "228183489657-gmd00gv8ekj9a4m4g0o5pd7m5lu97m9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1g_ILEB2X877Q2DEGU9_oQsm-EZd40oQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
