@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity
 		gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
 		mRecycler_view.setLayoutManager(gaggeredGridLayoutManager);
 
-		/*if (Utility.isOnline(mContext))
+		if (Utility.isOnline(mContext))
 		{
 			queue = Volley.newRequestQueue(this);
 			url = "http://www.mocky.io/v2/595c894b110000b700098815";
@@ -119,12 +119,13 @@ public class HomeActivity extends AppCompatActivity
 		);
 
 // add it to the RequestQueue
-		queue.add(getRequest);*/
+		queue.add(getRequest);
 //	}
+
 		RequestQueue queue = Volley.newRequestQueue(this);
 		String url = "http://202.143.96.20/Orderstest/api/Services/LoginService?";
 
-// POST parameters
+		// POST parameters
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Username", "BU0004");
 		params.put("Password", "BU0004");
