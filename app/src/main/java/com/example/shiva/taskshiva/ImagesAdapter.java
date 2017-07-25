@@ -10,12 +10,14 @@ import android.widget.Toast;
  * Created by Shiva on 7/5/2017.
  */
 
-public class ImagesAdapter  extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ImagesAdapter extends RecyclerView.ViewHolder implements View.OnClickListener
+{
 
 	public TextView countryName;
 	public ImageView countryPhoto;
 
-	public ImagesAdapter(View itemView) {
+	public ImagesAdapter(View itemView)
+	{
 		super(itemView);
 		itemView.setOnClickListener(this);
 		countryName = (TextView) itemView.findViewById(R.id.country_name);
@@ -23,7 +25,8 @@ public class ImagesAdapter  extends RecyclerView.ViewHolder implements View.OnCl
 	}
 
 	@Override
-	public void onClick(View view) {
+	public void onClick(View view)
+	{
 		Toast.makeText(view.getContext(), "Clicked Position = " + getPosition(), Toast.LENGTH_SHORT).show();
 	}
 }

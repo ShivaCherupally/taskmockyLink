@@ -45,6 +45,8 @@ public class HomeActivity extends AppCompatActivity
 	RequestQueue queue;
 	String url;
 
+	String response;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -58,117 +60,23 @@ public class HomeActivity extends AppCompatActivity
 		pd.setCancelable(false);
 		pd.show();
 
-		mRecycler_view= (RecyclerView) findViewById(R.id.recycler_view);
+		mRecycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 		mRecycler_view.setHasFixedSize(true);
 		mContext = HomeActivity.this;
 		gaggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
 		mRecycler_view.setLayoutManager(gaggeredGridLayoutManager);
-		if (Utility.isOnline(mContext)){
+
+		/*if (Utility.isOnline(mContext))
+		{
 			queue = Volley.newRequestQueue(this);
 			url = "http://www.mocky.io/v2/595c894b110000b700098815";
-		}else {
+		}
+		else
+		{
 			Toast.makeText(mContext, "Please Check internet Connection", Toast.LENGTH_SHORT).show();
 		}
 
-
-		/*// Instantiate the RequestQueue.
-		RequestQueue queue = Volley.newRequestQueue(this);
-		String url = "http://104.211.96.182:91/Service.asmx/Authenticate_User";
-
-		mParams = new HashMap<String, String>();
-		mParams.put("ptntcode", "SHRAF2510882");
-		mParams.put("pwd", "SHRA");
-
-		// Request a string response from the provided URL.
-		StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-		                                                new Response.Listener<String>()
-		                                                {
-			                                                @Override
-			                                                public void onResponse(String response)
-			                                                {
-				                                                response = response.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "");
-				                                                response = response.replace("<string xmlns=\"http://tempuri.org/\">", "");
-				                                                response = response.replace("<string xmlns=\"http://220.227.57.139:81/\">", "");
-				                                                response = response.replace("</string>", "");
-				                                                Log.e("response", response + "");
-				                                                try
-				                                                {
-					                                                JSONObject jobj = new JSONObject(response);
-					                                                String code = jobj.getString("code");
-					                                                Log.e("code", code + "");
-					                                                String msg = jobj.getString("msg");
-					                                                Log.e("msg", msg + "");
-					                                                JSONArray jsonArray = jobj.getJSONArray("data");
-					                                                Log.e("jsonArray", jsonArray + "");
-					                                                for (int i = 0; i < jsonArray.length(); i++)
-					                                                {
-						                                                String userId = jsonArray.getJSONObject(i).getString("PTNT_CD");
-						                                                Log.e("userId", userId + "");
-						                                                String emailid = jsonArray.getJSONObject(i).getString("EMAIL_ID");
-						                                                Log.e("emailid", emailid + "");
-						                                                String city = jsonArray.getJSONObject(i).getString("CITY");
-						                                                Log.e("city", city + "");
-					                                                }
-
-
-//
-//
-//						OffersListItemData offerlist_data = new OffersListItemData();
-//						offerlist_data.setID(jArray.getJSONObject(i).getInt(Constants.offer_id));
-//						offerlist_data.setDESCRIPTION(jArray.getJSONObject(i).getString(Constants.offer_description));
-//						offerlist_data.setIMAGE_URL(jArray.getJSONObject(i).getString(Constants.offer_image_url));
-//						offerlist_data.setCREATED_DATE(jArray.getJSONObject(i).getString(Constants.offer_created_date));
-//						offerlist_data.setACTIVE_FLAG(jArray.getJSONObject(i).getString(Constants.offer_active_date));
-//						offerlist_data.setNAME(jArray.getJSONObject(i).getString(Constants.offer_name));
-//						offerlist_data.setFRM_DT(jArray.getJSONObject(i).getString(Constants.offer_from_date));
-//						offerlist_data.setTO_DT(jArray.getJSONObject(i).getLong(Constants.offer_to_date));
-//						offerlist_data.setSEQUENCE(jArray.getJSONObject(i).getString(Constants.offer_sequence));
-//						offerlist_data.setTESTCODE(jArray.getJSONObject(i).getString(Constants.offer_test_code));
-//						offerlist_data.setDISCOUNT_TYPE(jArray.getJSONObject(i).getString(Constants.offer_discount_type));
-//						offerlist_data.setPERC_AMT(jArray.getJSONObject(i).getString(Constants.offer_perc_amt));
-//						offerlist_data.setACTION(jArray.getJSONObject(i).getString(Constants.offer_action));
-//						offerlist_data.setBANNER_FLG(jArray.getJSONObject(i).getString(Constants.offer_banner_flag));
-//						if (jArray.getJSONObject(i).getString(Constants.offer_banner_flag).equalsIgnoreCase("N"))
-//						{
-//							mOffersListItemData.add(offerlist_data);
-//						}
-//
-//					}
-				                                                }
-				                                                catch (Exception e)
-				                                                {
-					                                                e.printStackTrace();
-				                                                }
-
-				                                                // Display the first 500 characters of the response string.
-//				                                                mTextView.setText("Response is: " + response);
-			                                                }
-		                                                }, new Response.ErrorListener()
-
-
-		{
-			@Override
-			public void onErrorResponse(VolleyError error)
-			{
-//				mTextView.setText("That didn't work!");
-			}
-		})
-		{
-			@Override
-			protected Map<String, String> getParams()
-			{
-				return mParams;
-			}
-		};
-
-	// Add the request to the RequestQueue.
-		queue.add(stringRequest);*/
-
-
-
-
-
-// prepare the Request
+		// prepare the Request
 		JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, url, null,
 		                                                   new Response.Listener<JSONArray>()
 		                                                   {
@@ -187,8 +95,10 @@ public class HomeActivity extends AppCompatActivity
 				                                                   }
 				                                                   catch (Exception e)
 				                                                   {
+					                                                   e.printStackTrace();
 				                                                   }
-				                                                   if (listViewItems.size()!=0){
+				                                                   if (listViewItems.size() != 0)
+				                                                   {
 					                                                   pd.dismiss();
 					                                                   setDataintoAdapter();
 				                                                   }
@@ -209,10 +119,40 @@ public class HomeActivity extends AppCompatActivity
 		);
 
 // add it to the RequestQueue
-		queue.add(getRequest);
-//		List<ItemObjects> gaggeredList = getListItemData();
+		queue.add(getRequest);*/
+//	}
+		RequestQueue queue = Volley.newRequestQueue(this);
+		String url = "http://202.143.96.20/Orderstest/api/Services/LoginService?";
 
+// POST parameters
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("Username", "BU0004");
+		params.put("Password", "BU0004");
 
+		JSONObject jsonObj = new JSONObject(params);
+
+// Request a json response from the provided URL
+		JsonObjectRequest jsonObjRequest = new JsonObjectRequest
+				(Request.Method.POST, url, jsonObj, new Response.Listener<JSONObject>()
+				{
+					@Override
+					public void onResponse(JSONObject response)
+					{
+						Log.e("response", response.toString());
+						Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+					}
+				},
+				 new Response.ErrorListener()
+				 {
+					 @Override
+					 public void onErrorResponse(VolleyError error)
+					 {
+						 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+					 }
+				 });
+
+// Add the request to the RequestQueue.
+		queue.add(jsonObjRequest);
 	}
 
 	private void setDataintoAdapter()
@@ -229,43 +169,7 @@ public class HomeActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
-	}
-/*
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}*/
-
-	private List<ItemObjects> getListItemData()
-	{
-		List<ItemObjects> listViewItems = new ArrayList<ItemObjects>();
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		listViewItems.add(new ItemObjects("Alkane", String.valueOf(R.drawable.hearts)));
-		return listViewItems;
 	}
 
 }

@@ -123,7 +123,6 @@ public class Utility
         } catch (Exception e) {
             if (e != null) {
                 e.printStackTrace();
-                Log.w("HARI-->DEBUG", e);
             }
         }
     }
